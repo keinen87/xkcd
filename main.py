@@ -41,12 +41,9 @@ def upload_photo(api_url_template, params, upload_url, filepath):
     response = requests.post(upload_url, params=params, files=files)
     image_file_descriptor.close()
     response.raise_for_status()
-    photo_parameter = response.json()['photo']
-    server_parameter = response.json()['server']
-    hash_parameter = response.json()['hash']
-    params['photo'] = photo_parameter
-    params['server'] = server_parameter
-    params['hash'] = hash_parameter
+    params['photo'] = response.json()['photo']
+    params['server'] = response.json()['server']
+    params['hash'] = response.json()['hash']
     return params
 
 
